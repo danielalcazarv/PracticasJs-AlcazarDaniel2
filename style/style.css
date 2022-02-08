@@ -1,0 +1,53 @@
+*{
+    margin: 0, auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif; 
+}
+body{
+    background-image: url(../img/disney-magic.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+h1{
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1rem;
+    color: #6300d9;
+    font-size: 3.5rem;
+}
+
+h2{
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1rem;
+    color: #6300d9;
+    font-size: 3rem;
+}
+
+.text-normal{
+    max-width: 1200px;
+    color: #ffba08;
+
+    margin: 0 auto;
+    font-size: 2rem;
+    padding: 0.9rem;
+}
+
+.text-total{
+    max-width: 1200px;
+    color: #ffba08;
+    background-color: #9c0120;
+    font-weight: bold;
+    margin: 0 auto;
+    font-size: 2.5rem;
+    padding: 0.9rem;
+}
+
