@@ -8,7 +8,7 @@ let totalP = 0;
 let totalE = 0;
 let vuelo;
 
-const SUMA = (a,b) => a + b
+const SUMA = (a,b) => a + b;
 
 function datos (){
     personas = parseInt(prompt("Ingrese la cantidad de personas que viajan"));
@@ -17,7 +17,7 @@ function datos (){
 
 
 function aerolinea(){
-    let aereos = prompt ("Seleccione su aerolinea: AA AR LA");
+    let aereos = prompt ("Ingrese su aerolinea: AA AR LA");
     vuelo = aereos.toUpperCase();
     
     switch(vuelo){
@@ -36,7 +36,6 @@ function aerolinea(){
     }
 }
 
-
 do {
     datos();
     if(personas>0 && dias>0){
@@ -50,7 +49,7 @@ document.write ('<p class="text-normal">Estadia total: '+dias+' día/s</p>');
 console.log (totalP);
 document.write ('<p class="text-normal">Valor Final Atracciones Disney 4 días 4 parques temáticos: $' + totalP + ' USD</p>');
 console.log (totalE);
-document.write ('<p class="text-normal">Valor final por una estadia de ' + dias + ' día/s en un hotel 3 estrellas: $' + totalE + ' USD</p>');
+document.write ('<p class="text-normal">Valor Final por una estadia de ' + dias + ' día/s en un hotel 3 estrellas: $' + totalE + ' USD</p>');
 
 aerolinea();
 let paquete = vuelo;
