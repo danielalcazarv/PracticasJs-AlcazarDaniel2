@@ -3,7 +3,7 @@ alert ("Armemos tu viaje a Disney!");
 class Producto {
     constructor(nombre, precio){
         this.nombre = nombre.toUpperCase();
-        this.precio = parseInt(precio);
+        this.precio = parseFloat(precio);
     }
 }
 
@@ -100,19 +100,16 @@ aerolinea();
 let paquete = vuelo;
 console.log (paquete);
 if (paquete ==="AA"){
-    let aa = 1300;
-    let paqueteAA = SUMA (aa,SUMA(totalE,totalP));
-    document.write('<p class="text-normal">Viajas por American Airlines. Valor de tu vuelo: $' + aa + ' USD</p>');
+    let paqueteAA = SUMA (airline[0].precio,SUMA(totalE,totalP));
+    document.write('<p class="text-normal">Viajas por American Airlines. Valor de tu vuelo: $' + airline[0].precio + ' USD</p>');
     document.write('<p class="text-total">VALOR TOTAL DE TU PAQUETE: $' + paqueteAA +' USD</p>');
 }else if(paquete ==="AR"){
-    let ar = 1100;
-    let paqueteAR = SUMA (ar,SUMA(totalE,totalP));
-    document.write('<p class="text-normal">Viajas por Aerolineas Argentinas. Valor de tu vuelo: $' + ar + ' USD</p>');
+    let paqueteAR = SUMA (airline[1].precio,SUMA(totalE,totalP));
+    document.write('<p class="text-normal">Viajas por Aerolineas Argentinas. Valor de tu vuelo: $' + airline[1].precio + ' USD</p>');
     document.write('<p class="text-total">VALOR TOTAL DE TU PAQUETE: $' + paqueteAR +' USD</p>');
 }else if(paquete ==="LA"){
-    let la = 900;
-    let paqueteLA = SUMA (la,SUMA(totalE,totalP));
-    document.write('<p class="text-normal">Viajas por LATAM. Valor de tu vuelo: $' + la + ' USD</p>');
+    let paqueteLA = SUMA (airline[2].precio,SUMA(totalE,totalP));
+    document.write('<p class="text-normal">Viajas por LATAM. Valor de tu vuelo: $' + airline[2].precio + ' USD</p>');
     document.write('<p class="text-total">VALOR TOTAL DE TU PAQUETE: $' + paqueteLA +' USD</p>');
 }else{
     let paqueteNull = SUMA (totalE,totalP);
