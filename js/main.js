@@ -1,9 +1,31 @@
 alert ("Armemos tu viaje a Disney!");
 
-let parques = 436; // Valor total en USD para ingresar a los 4 parques
+class Producto {
+    constructor(nombre, precio){
+        this.nombre = nombre.toUpperCase();
+        this.precio = parseInt(precio);
+    }
+}
+
+const parks = [];
+parks.push (new Producto("magic kingdom", "109"));
+parks.push (new Producto("epcot", "109"));
+parks.push (new Producto("animal kingdom", "109"));
+parks.push (new Producto("hollywood Studios", "109"));
+parks.push (new Producto("Typhoon Lagoon", "74"));
+parks.push (new Producto("Blizzard Beach", "74"));
+
+const airline = [];
+airline.push (new Producto("AA", "1300"));
+airline.push (new Producto("AR", "1100"));
+airline.push (new Producto("LA", "900"));
+
+
 let hotel = 65; //Valor en USD x día
 let dias;
 let personas;
+let parquesAcuaticos;
+let pAtoUpper;
 let totalP = 0;
 let totalE = 0;
 let vuelo;
@@ -13,8 +35,9 @@ const SUMA = (a,b) => a + b;
 function datos (){
     personas = parseInt(prompt("Ingrese la cantidad de personas que viajan"));
     dias = parseInt(prompt ("Ingrese la cantidad de días de su estadía"));
+    parquesAcuaticos = prompt ("Desea agregar parques acuáticos?");
+    pAtoUpper = parquesAcuaticos.toUpperCase();
 }
-
 
 function aerolinea(){
     let aereos = prompt ("Ingrese su aerolinea: AA AR LA");
@@ -36,10 +59,31 @@ function aerolinea(){
     }
 }
 
+function parkTotal (){
+    let total = 0;
+    for (let i = 0; i < parks.length; i++){
+        total = total + parks[i].precio;
+    }
+    return total;
+}
+
+function noAcua (){
+    parks.splice (4,2)  
+    let total = 0;
+    for (let i = 0; i < parks.length; i++){
+        total = total + parks[i].precio;
+    }
+    return total;
+}
+
 do {
     datos();
-    if(personas>0 && dias>0){
-        totalP = personas * parques;
+    if(personas>0 && dias>0 && pAtoUpper === "SI"){
+        totalP = personas * parkTotal();
+        totalE = dias * personas * hotel;
+    }else if(personas>0 && dias>0){
+        noAcua();
+        totalP = personas * noAcua();
         totalE = dias * personas * hotel;
     }
 }while(personas<=0 || dias<=0 || isNaN(personas) || isNaN(dias));
@@ -50,6 +94,7 @@ console.log (totalP);
 document.write ('<p class="text-normal">Valor Final Atracciones Disney 4 días 4 parques temáticos: $' + totalP + ' USD</p>');
 console.log (totalE);
 document.write ('<p class="text-normal">Valor Final por una estadia de ' + dias + ' día/s en un hotel 3 estrellas: $' + totalE + ' USD</p>');
+console.log (pAtoUpper);
 
 aerolinea();
 let paquete = vuelo;
