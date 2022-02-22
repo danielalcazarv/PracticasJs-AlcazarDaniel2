@@ -56,6 +56,10 @@ let vuelo;
 const SUMA = (a,b) => a + b;
 const MULTI = (a,b) => a * b;
 
+const datosUsuario = document.querySelector('.datosUsuario');
+const datosPaquete = document.querySelector('.datosPaquete');
+const totales = document.querySelector('.totales');
+
 const pesificarParks = parks.map ( x => {
     return {
         id: x.id,
@@ -135,6 +139,113 @@ function estadiaHotel(){
     return total;
 }
 
+function mostrarUsuario(){
+    const personasCantidad = document.createElement('p');
+    personasCantidad.classList.add('text-normal');
+    personasCantidad.textContent = "Cantidad Total de Personas: " + personas;
+
+    const estadia = document.createElement('p');
+    estadia.classList.add('text-normal');
+    estadia.textContent = "Estadia total ingresada: " + dias + " día/s";
+
+    datosUsuario.appendChild(personasCantidad);
+    datosUsuario.appendChild(estadia);
+}
+
+function mostrarPaquete(){
+    const parqueSelect = document.createElement('p');
+    parqueSelect.classList.add('text-normal');
+    parqueSelect.textContent = "Valor Final Atracciones Disney parques temáticos: $"+totalP+" USD";
+
+    const hotelSelect = document.createElement('p');
+    hotelSelect.classList.add('text-normal');
+    hotelSelect.textContent = "Valor Final por una estadia de "+dias+" día/s en un hotel " +hotel+ " estrellas: $" +totalE+ " USD";
+
+    datosPaquete.appendChild(parqueSelect);
+    datosPaquete.appendChild(hotelSelect);
+}
+
+function mostrarVuelo(){
+    if (vuelo ==="AA"){
+        const vueloAA = document.createElement('p');
+        vueloAA.classList.add('text-normal');
+        vueloAA.textContent = "Viajas por American Airlines. Valor de tu vuelo: $" +airline[0].precio+ "USD";
+        datosPaquete.appendChild(vueloAA);
+        
+    }else if(vuelo ==="AR"){
+        const vueloAR = document.createElement('p');
+        vueloAR.classList.add('text-normal');
+        vueloAR.textContent = "Viajas por Aerolineas Argentinas. Valor de tu vuelo: $" +airline[1].precio+ "USD";
+        datosPaquete.appendChild(vueloAR)
+        
+    }else if(vuelo ==="LA"){
+        const vueloLA = document.createElement('p');
+        vueloLA.classList.add('text-normal');
+        vueloLA.textContent = "Viajas por LATAM. Valor de tu vuelo: $" +airline[2].precio+ "USD";
+        datosPaquete.appendChild(vueloLA);
+        
+    }else{
+        const vueloNone = document.createElement('p');
+        vueloNone.classList.add('text-normal');
+        vueloNone.textContent = "No seleccionaste ninguna aerolinea";
+        datosPaquete.appendChild(vueloNone);
+    }
+}
+
+function mostrarTotalesUSD(){
+    if (vuelo ==="AA"){
+        const vueloAA = document.createElement('p');
+        vueloAA.classList.add('text-total');
+        vueloAA.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (airline[0].precio,SUMA(totalE,totalP)) + "USD";
+        totales.appendChild(vueloAA);
+    
+    }else if(vuelo ==="AR"){
+        const vueloAR = document.createElement('p');
+        vueloAR.classList.add('text-total');
+        vueloAR.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (airline[1].precio,SUMA(totalE,totalP)) + "USD";
+        totales.appendChild(vueloAR)
+        
+    }else if(vuelo ==="LA"){
+        const vueloLA = document.createElement('p');
+        vueloLA.classList.add('text-total');
+        vueloLA.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (airline[2].precio,SUMA(totalE,totalP)) + "USD";
+        totales.appendChild(vueloLA);
+        
+    }else{
+        const vueloNone = document.createElement('p');
+        vueloNone.classList.add('text-total');
+        vueloNone.textContent = "VALOR TOTAL EN DOLARES: $"+ SUMA (totalE,totalP) + "USD";
+        totales.appendChild(vueloNone);
+    }
+}
+
+function mostrarTotalesARS(){
+    if (vuelo ==="AA"){
+        const vueloAA = document.createElement('p');
+        vueloAA.classList.add('text-total');
+        vueloAA.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (airline[0].precio,SUMA(totalE,totalP)),cotiHoy) + "ARS";
+        totales.appendChild(vueloAA);
+    
+    }else if(vuelo ==="AR"){
+        const vueloAR = document.createElement('p');
+        vueloAR.classList.add('text-total');
+        vueloAR.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (airline[1].precio,SUMA(totalE,totalP)),cotiHoy) + "ARS";
+        totales.appendChild(vueloAR)
+        
+    }else if(vuelo ==="LA"){
+        const vueloLA = document.createElement('p');
+        vueloLA.classList.add('text-total');
+        vueloLA.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (airline[2].precio,SUMA(totalE,totalP)),cotiHoy) + "ARS";
+        totales.appendChild(vueloLA);
+        
+    }else{
+        const vueloNone = document.createElement('p');
+        vueloNone.classList.add('text-total');
+        vueloNone.textContent = "VALOR TOTAL EN PESOS: $"+ MULTI(SUMA(totalE,totalP),cotiHoy) + "ARS";
+        totales.appendChild(vueloNone);
+    }
+}
+
 do {
     datos();
     aerolinea();
@@ -148,32 +259,16 @@ do {
     }
 }while(personas<=0 || dias<=0 || hotel<3 || hotel>5 || isNaN(personas) || isNaN(dias) || isNaN(hotel));
 
-document.write ('<p class="text-normal">Cantidad Total de Personas: '+personas+'</p>');
-document.write ('<p class="text-normal">Estadia total: '+dias+' día/s</p>');
+mostrarUsuario();
+mostrarPaquete();
+mostrarVuelo();
+mostrarTotalesUSD();
+mostrarTotalesARS();
+
 console.log (totalP);
-document.write ('<p class="text-normal">Valor Final Atracciones Disney parques temáticos: $' + totalP + ' USD</p>');
 console.log (totalE);
-document.write ('<p class="text-normal">Valor Final por una estadia de ' + dias + ' día/s en un hotel '+hotel+ ' estrellas: $' + totalE + ' USD</p>');
 console.log (pAtoUpper);
 console.log (pesificarParks);
 console.log (pesificarHotels);
 console.log (pesificarAirline);
-console.log (vuelo);
-
-if (vuelo ==="AA"){
-    document.write('<p class="text-normal">Viajas por American Airlines. Valor de tu vuelo: $' + airline[0].precio + ' USD</p>');
-    document.write('<p class="text-total">VALOR TOTAL EN DOLARES: $' + SUMA (airline[0].precio,SUMA(totalE,totalP)) +' USD</p>');
-    document.write('<p class="text-total">VALOR TOTAL EN PESOS: $' + MULTI(SUMA (airline[0].precio,SUMA(totalE,totalP)),cotiHoy) +' ARG</p>');
-}else if(vuelo ==="AR"){
-    document.write('<p class="text-normal">Viajas por Aerolineas Argentinas. Valor de tu vuelo: $' + airline[1].precio + ' USD</p>');
-    document.write('<p class="text-total">VALOR TOTAL EN DOLARES: $' + SUMA (airline[1].precio,SUMA(totalE,totalP)) +' USD</p>');
-    document.write('<p class="text-total">VALOR TOTAL EN PESOS: $' + MULTI(SUMA (airline[1].precio,SUMA(totalE,totalP)),cotiHoy) +' ARG</p>');
-}else if(vuelo ==="LA"){
-    document.write('<p class="text-normal">Viajas por LATAM. Valor de tu vuelo: $' + airline[2].precio + ' USD</p>');
-    document.write('<p class="text-total">VALOR TOTAL EN DOLARES: $' + SUMA (airline[2].precio,SUMA(totalE,totalP)) +' USD</p>');
-    document.write('<p class="text-total">VALOR TOTAL EN PESOS: $' + MULTI(SUMA (airline[2].precio,SUMA(totalE,totalP)),cotiHoy) +' ARG</p>');
-}else{
-    document.write('<p class="text-normal">No seleccionaste ninguna aerolinea</p>');
-    document.write('<p class="text-total">VALOR TOTAL EN DOLARES: $' + SUMA (totalE,totalP) +' USD</p>');
-    document.write('<p class="text-total">VALOR TOTAL EN PESOS: $' + MULTI(SUMA(totalE,totalP),cotiHoy) +' ARG</p>');
-}
+console.log (vuelo)
