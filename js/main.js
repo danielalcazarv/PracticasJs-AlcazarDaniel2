@@ -1,14 +1,24 @@
 alert ("Armemos tu viaje a Disney!");
 
-class Producto {
-    constructor(nombre, precio){
+class Parques {
+    constructor(id, nombre, precio){
+        this.id = parseInt(id);
         this.nombre = nombre.toUpperCase();
         this.precio = parseFloat(precio);
     }
 }
 
-class Producto2 {
-    constructor(estrellas, nombre, precio){
+class Aerolineas {
+    constructor(id, nombre, precio){
+        this.id = parseInt(id);
+        this.nombre = nombre.toUpperCase();
+        this.precio = parseFloat(precio);
+    }
+}
+
+class Hotel {
+    constructor(id, estrellas, nombre, precio){
+        this.id = parseInt(id);
         this.estrellas = parseInt(estrellas);
         this.nombre = nombre.toUpperCase();
         this.precio = parseFloat(precio);
@@ -16,22 +26,22 @@ class Producto2 {
 }
 
 const parks = [];
-parks.push (new Producto("magic kingdom", "109"));
-parks.push (new Producto("epcot", "109"));
-parks.push (new Producto("animal kingdom", "109"));
-parks.push (new Producto("hollywood Studios", "109"));
-parks.push (new Producto("Typhoon Lagoon", "74"));
-parks.push (new Producto("Blizzard Beach", "74"));
+parks.push (new Parques(1,"magic kingdom", 109));
+parks.push (new Parques(2,"epcot", "109"));
+parks.push (new Parques(3,"animal kingdom", 109));
+parks.push (new Parques(4,"hollywood Studios", 109));
+parks.push (new Parques(5,"Typhoon Lagoon", 74));
+parks.push (new Parques(6,"Blizzard Beach", 74));
 
 const airline = [];
-airline.push (new Producto("AA", "1300"));
-airline.push (new Producto("AR", "1100"));
-airline.push (new Producto("LA", "900"));
+airline.push (new Aerolineas(1,"AA", 1300));
+airline.push (new Aerolineas(2,"AR", 1100));
+airline.push (new Aerolineas(3,"LA", 900));
 
 const hotels = [];
-hotels.push (new Producto2("3", "value hotels", "68"));
-hotels.push (new Producto2("4", "moderate hotels", "144"));
-hotels.push (new Producto2("5", "deluxe hotels", "350"));
+hotels.push (new Hotel(1,3, "value hotels", 68));
+hotels.push (new Hotel(2,4, "moderate hotels", 144));
+hotels.push (new Hotel(3,5, "deluxe hotels", 350));
 
 let cotiHoy = 212;
 let hotel;
@@ -48,6 +58,7 @@ const MULTI = (a,b) => a * b;
 
 const pesificarParks = parks.map ( x => {
     return {
+        id: x.id,
         nombre: x.nombre,
         precio: x.precio * cotiHoy,
     }
@@ -55,6 +66,7 @@ const pesificarParks = parks.map ( x => {
 
 const pesificarAirline = airline.map ( x => {
     return {
+        id: x.id,
         nombre: x.nombre,
         precio: x.precio * cotiHoy,
     }
@@ -62,6 +74,7 @@ const pesificarAirline = airline.map ( x => {
 
 const pesificarHotels = hotels.map ( x => {
     return {
+        id: x.id,
         estrellas: x.estrellas,
         nombre: x.nombre,
         precio: x.precio * cotiHoy,
@@ -114,10 +127,10 @@ function noAcua (){
 }
 
 function estadiaHotel(){
-    hotels.filter(x=>x.estrellas === hotel)
-    let total = 0
-    for (let i = 0; i < hotels.length; i++){
-        total = total + hotels[i].precio;
+    const resultado = hotels.filter((x)=>x.estrellas === hotel);
+    let total = 0;
+    for (let i = 0; i < resultado.length; i++){
+        total = total + resultado[i].precio;
     }
     return total;
 }
