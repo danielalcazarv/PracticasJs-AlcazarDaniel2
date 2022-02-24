@@ -113,6 +113,7 @@ function estadiaHotel(){
 }
 
 function mostrarUsuario(){
+    datosUsuario.innerHTML="";
     const personasCantidad = document.createElement('p');
     personasCantidad.classList.add('text-normal');
     personasCantidad.textContent = "Cantidad Total de Personas: " + personas.value;
@@ -126,6 +127,7 @@ function mostrarUsuario(){
 }
 
 function mostrarPaquete(){
+    datosPaquete.innerHTML="";
     const parqueSelect = document.createElement('p');
     parqueSelect.classList.add('text-normal');
     parqueSelect.textContent = "Valor Final Atracciones Disney parques temáticos: $"+totalP+" USD";
@@ -166,6 +168,7 @@ function mostrarVuelo(){
 }
 
 function mostrarTotalesUSD(){
+    totales.innerHTML="";
     if (vuelo ==="AA"){
         const vueloAA = document.createElement('p');
         vueloAA.classList.add('text-total');
