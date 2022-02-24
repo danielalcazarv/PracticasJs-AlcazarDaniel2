@@ -1,5 +1,3 @@
-//alert ("Armemos tu viaje a Disney!");
-
 //Variables
 class Parques {
     constructor(id, nombre, precio){
@@ -26,9 +24,12 @@ class Hotel {
     }
 }
 
-const parks = [];
+const SUMA = (a,b) => a + b;
+const MULTI = (a,b) => a * b;
+
+const parks = [];   
 parks.push (new Parques(1,"magic kingdom", 109));
-parks.push (new Parques(2,"epcot", "109"));
+parks.push (new Parques(2,"epcot", 109));
 parks.push (new Parques(3,"animal kingdom", 109));
 parks.push (new Parques(4,"hollywood Studios", 109));
 parks.push (new Parques(5,"Typhoon Lagoon", 74));
@@ -44,23 +45,24 @@ hotels.push (new Hotel(1,3, "value hotels", 68));
 hotels.push (new Hotel(2,4, "moderate hotels", 144));
 hotels.push (new Hotel(3,5, "deluxe hotels", 350));
 
-let cotiHoy = 212;
-let hotel;
-let dias;
-let personas;
-let parquesAcuaticos;
-let pAtoUpper;
-let totalP = 0;
-let totalE = 0;
-let vuelo;
-
-const SUMA = (a,b) => a + b;
-const MULTI = (a,b) => a * b;
-
+const dias = document.getElementById('cantidadEstadia');
+const personas = document.getElementById('cantidadPasajeros');
+const selectVuelo = document.getElementById('vuelo');
+const selectHotel = document.getElementById('hotel');
+const miFormulario = document.getElementById('formulario');
 const datosUsuario = document.querySelector('.datosUsuario');
 const datosPaquete = document.querySelector('.datosPaquete');
 const totales = document.querySelector('.totales');
+const parksChecked = document.querySelectorAll('.checkSi:checked');
+const parksElegidos = Array.from(parksChecked);
 
+console.log(parksElegidos);
+
+let totalP = 0;
+let totalE = 0;
+let vuelo;
+let cotiHoy = 212;
+let hotel;
 
 /*
 const pesificarParks = parks.map ( x => {
@@ -89,45 +91,11 @@ const pesificarHotels = hotels.map ( x => {
 })*/
 
 //Funciones
-/*
-function datos (){
-    personas = parseInt(prompt("Ingrese la cantidad de personas que viajan"));
-    dias = parseInt(prompt ("Ingrese la cantidad de días de su estadía"));
-    parquesAcuaticos = prompt ("Desea agregar parques acuáticos?");
-    pAtoUpper = parquesAcuaticos.toUpperCase();
-    hotel = parseInt(prompt("Seleccione su hotel 3, 4 o 5 Estrellas"))
-}
-
-function aerolinea(){
-    let aereos = prompt ("Ingrese su aerolinea: AA AR LA");
-    vuelo = aereos.toUpperCase();
-    
-    switch(vuelo){
-        case "AA":
-            alert("Viajas por American Airlines");
-            break;
-        case "AR":
-            alert("Viajas por Aerolineas Argentinas");
-            break;
-        case "LA":
-            alert ("Viajas por LATAM");
-            break;
-        default:
-            alert ("No seleccionaste ninguna aerolinea");
-        break;
-    }
-}*/
-
 function parkTotal (){
-    let total = 0;
-    for (let i = 0; i < parks.length; i++){
-        total = total + parks[i].precio;
-    }
-    return total;
-}
-
-function noAcua (){
-    parks.splice (4,2)  
+    /*const filtrar1 = parksElegidos.map(el => el.value);
+    const cruzar = parks.filter.id(element => filtrar1.includes(element));
+    console.log(cruzar);*/
+    
     let total = 0;
     for (let i = 0; i < parks.length; i++){
         total = total + parks[i].precio;
@@ -251,13 +219,14 @@ function mostrarTotalesARS(){
     }
 }
 
-function operacionEstadia(){
+function operaciones(){
     totalE = dias.value * personas.value * estadiaHotel();
+    totalP = personas.value * parkTotal();
 }
 
 function validarFormulario(e){
     e.preventDefault ();
-    operacionEstadia();
+    operaciones();
     mostrarUsuario();
     mostrarPaquete();
     mostrarVuelo();
@@ -265,58 +234,23 @@ function validarFormulario(e){
     mostrarTotalesARS();
 }
 
-
 //Eventos
-personas = document.getElementById("cantidadPasajeros");
 personas.addEventListener("input", () =>{
     console.log(personas.value)
 });
 
-dias = document.getElementById("cantidadEstadia");
 dias.addEventListener("input",() => {
     console.log(dias.value)
 })
 
-let selectVuelo = document.getElementById("vuelo");
 selectVuelo.onclick = () => {
     vuelo = selectVuelo.options[selectVuelo.selectedIndex].value;
     console.log(vuelo);
 }
 
-let selectHotel = document.getElementById("hotel");
 selectHotel.onclick = () =>{
     hotel = selectHotel.options[selectHotel.selectedIndex].value;
     console.log(hotel);
 }
 
-let miFormulario = document.getElementById("formulario");
 miFormulario.addEventListener("submit", validarFormulario);
-
-
-
-
-/*
-do {
-    if(personas>0 && dias>0 && pAtoUpper === "SI"){
-        totalP = personas * parkTotal();
-        totalE = dias * personas * estadiaHotel();
-    }else if(personas>0 && dias>0){
-        noAcua();
-        totalP = personas * noAcua();
-        totalE = dias * personas * estadiaHotel();
-    }
-}while(personas<=0 || dias<=0 || hotel<3 || hotel>5 || isNaN(personas) || isNaN(dias) || isNaN(hotel));
-
-mostrarUsuario();
-mostrarPaquete();
-mostrarVuelo();
-mostrarTotalesUSD();
-mostrarTotalesARS();
-
-console.log (totalP);
-console.log (totalE);
-console.log (pAtoUpper);
-console.log (pesificarParks);
-console.log (pesificarHotels);
-console.log (pesificarAirline);
-console.log (vuelo)*/
