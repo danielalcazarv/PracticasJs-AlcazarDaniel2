@@ -15,7 +15,7 @@
         <h1>Viajes Mágicos</h1>
         <h2>Arma tu paquete</h2>
         <div class="formulario m-auto p-3">
-            <form class="row g-3 ">
+            <form class="row g-3" id="formulario">
                 <div class="col-md-6">
                     <label for="cantidadPasajeros" class="form-label">Ingrese Cantidad de Pasajeros</label>
                     <input type="number" class="form-control" id="cantidadPasajeros">
@@ -26,20 +26,19 @@
                 </div>
                 <div class="col-md-6">
                     <label for="vuelo" class="form-label">Seleccione su Aerolinea</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected></option>
-                        <option value="1">American Airlines</option>
-                        <option value="2">Aerolineas Argentinas</option>
-                        <option value="3">LATAM</option>
+                    <select class="form-select" id="vuelo" aria-label="Default select example">
+                        <option value="0" selected></option>
+                        <option value="AA">American Airlines</option>
+                        <option value="AR">Aerolineas Argentinas</option>
+                        <option value="LA">LATAM</option>
                     </select>
                 </div>
                 <div class="col-md-6">
                     <label for="hotel" class="form-label">Seleccione su Hotel</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected></option>
-                        <option value="1">Value Hotels $</option>
-                        <option value="2">Moderate Hotels $$</option>
-                        <option value="3">Deluxe Hotels $$$</option>
+                    <select class="form-select" id="hotel" aria-label="Default select example">
+                        <option value="3" selected>Value Hotels $</option>
+                        <option value="4">Moderate Hotels $$</option>
+                        <option value="5">Deluxe Hotels $$$</option>
                     </select>
                 </div>
                 <div class="col-12 custom-checkbox custom-control">
@@ -79,13 +78,13 @@
         </div>
 
 
-        <div class="datosUsuario">
+        <div class="datosUsuario gy-3 p-3">
         </div>
 
-        <div class="datosPaquete">
+        <div class="datosPaquete gy-3 p-3">
         </div>
 
-        <div class="totales">
+        <div class="totales gy-3 p-3">
         </div>
     </main>
     <!--Bootstrap-->

@@ -1,5 +1,6 @@
 //alert ("Armemos tu viaje a Disney!");
 
+//Variables
 class Parques {
     constructor(id, nombre, precio){
         this.id = parseInt(id);
@@ -60,6 +61,8 @@ const datosUsuario = document.querySelector('.datosUsuario');
 const datosPaquete = document.querySelector('.datosPaquete');
 const totales = document.querySelector('.totales');
 
+
+/*
 const pesificarParks = parks.map ( x => {
     return {
         id: x.id,
@@ -83,8 +86,10 @@ const pesificarHotels = hotels.map ( x => {
         nombre: x.nombre,
         precio: x.precio * cotiHoy,
     }
-})
+})*/
 
+//Funciones
+/*
 function datos (){
     personas = parseInt(prompt("Ingrese la cantidad de personas que viajan"));
     dias = parseInt(prompt ("Ingrese la cantidad de días de su estadía"));
@@ -111,7 +116,7 @@ function aerolinea(){
             alert ("No seleccionaste ninguna aerolinea");
         break;
     }
-}
+}*/
 
 function parkTotal (){
     let total = 0;
@@ -131,7 +136,7 @@ function noAcua (){
 }
 
 function estadiaHotel(){
-    const resultado = hotels.filter((x)=>x.estrellas === hotel);
+    const resultado = hotels.filter((x)=>x.estrellas == hotel);
     let total = 0;
     for (let i = 0; i < resultado.length; i++){
         total = total + resultado[i].precio;
@@ -142,11 +147,11 @@ function estadiaHotel(){
 function mostrarUsuario(){
     const personasCantidad = document.createElement('p');
     personasCantidad.classList.add('text-normal');
-    personasCantidad.textContent = "Cantidad Total de Personas: " + personas;
+    personasCantidad.textContent = "Cantidad Total de Personas: " + personas.value;
 
     const estadia = document.createElement('p');
     estadia.classList.add('text-normal');
-    estadia.textContent = "Estadia total ingresada: " + dias + " día/s";
+    estadia.textContent = "Estadia total ingresada: " + dias.value + " día/s";
 
     datosUsuario.appendChild(personasCantidad);
     datosUsuario.appendChild(estadia);
@@ -159,7 +164,7 @@ function mostrarPaquete(){
 
     const hotelSelect = document.createElement('p');
     hotelSelect.classList.add('text-normal');
-    hotelSelect.textContent = "Valor Final por una estadia de "+dias+" día/s en un hotel " +hotel+ " estrellas: $" +totalE+ " USD";
+    hotelSelect.textContent = "Valor Final por una estadia de "+ dias.value +" día/s en un hotel " + hotel + " estrellas: $" +totalE+ " USD";
 
     datosPaquete.appendChild(parqueSelect);
     datosPaquete.appendChild(hotelSelect);
@@ -245,10 +250,53 @@ function mostrarTotalesARS(){
         totales.appendChild(vueloNone);
     }
 }
+
+function operacionEstadia(){
+    totalE = dias.value * personas.value * estadiaHotel();
+}
+
+function validarFormulario(e){
+    e.preventDefault ();
+    operacionEstadia();
+    mostrarUsuario();
+    mostrarPaquete();
+    mostrarVuelo();
+    mostrarTotalesUSD();
+    mostrarTotalesARS();
+}
+
+
+//Eventos
+personas = document.getElementById("cantidadPasajeros");
+personas.addEventListener("input", () =>{
+    console.log(personas.value)
+});
+
+dias = document.getElementById("cantidadEstadia");
+dias.addEventListener("input",() => {
+    console.log(dias.value)
+})
+
+let selectVuelo = document.getElementById("vuelo");
+selectVuelo.onclick = () => {
+    vuelo = selectVuelo.options[selectVuelo.selectedIndex].value;
+    console.log(vuelo);
+}
+
+let selectHotel = document.getElementById("hotel");
+selectHotel.onclick = () =>{
+    hotel = selectHotel.options[selectHotel.selectedIndex].value;
+    console.log(hotel);
+}
+
+let miFormulario = document.getElementById("formulario");
+miFormulario.addEventListener("submit", validarFormulario);
+
+
+
+
 /*
 do {
-    datos();
-    aerolinea();
     if(personas>0 && dias>0 && pAtoUpper === "SI"){
         totalP = personas * parkTotal();
         totalE = dias * personas * estadiaHotel();
