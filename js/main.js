@@ -56,7 +56,6 @@ const totales = document.querySelector('.totales');
 const parksChecked = document.querySelectorAll('.checkSi:checked');
 const parksElegidos = Array.from(parksChecked);
 
-console.log(parksElegidos);
 
 let totalP = 0;
 let totalE = 0;
@@ -92,13 +91,19 @@ const pesificarHotels = hotels.map ( x => {
 
 //Funciones
 function parkTotal (){
-    /*const filtrar1 = parksElegidos.map(el => el.value);
-    const cruzar = parks.filter.id(element => filtrar1.includes(element));
-    console.log(cruzar);*/
-    
+    const seleccion = [];
+    for (let i = 0; i < parksElegidos.length; i++) {
+        seleccion.push(parksElegidos[i].value)
+    }
+    const filtrar = parks.filter((x)=>!seleccion.find(y=>x.id==y))
+    console.log(filtrar);
+
+    const diferencia = parks.filter((x)=>!filtrar.find(y=>x.id==y.id));
+    console.log(diferencia);
     let total = 0;
-    for (let i = 0; i < parks.length; i++){
-        total = total + parks[i].precio;
+
+    for (let i = 0; i < diferencia.length; i++){
+        total = total + diferencia[i].precio;
     }
     return total;
 }
