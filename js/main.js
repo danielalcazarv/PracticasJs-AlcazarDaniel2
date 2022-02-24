@@ -1,4 +1,4 @@
-alert ("Armemos tu viaje a Disney!");
+//alert ("Armemos tu viaje a Disney!");
 
 class Parques {
     constructor(id, nombre, precio){
@@ -245,7 +245,7 @@ function mostrarTotalesARS(){
         totales.appendChild(vueloNone);
     }
 }
-
+/*
 do {
     datos();
     aerolinea();
@@ -271,4 +271,4 @@ console.log (pAtoUpper);
 console.log (pesificarParks);
 console.log (pesificarHotels);
 console.log (pesificarAirline);
-console.log (vuelo)
+console.log (vuelo)*/

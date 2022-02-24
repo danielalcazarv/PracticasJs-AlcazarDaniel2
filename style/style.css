@@ -5,7 +5,7 @@
     font-family: 'Inter', sans-serif; 
 }
 main{
-    background-image: url(../img/disney-magic.jpg);
+    background-image: url(../img/disney-magic2.jpg);
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -20,6 +20,7 @@ h1{
     padding: 1rem;
     color: #6300d9;
     font-size: 3.5rem;
+    font-weight: bold;
 }
 
 h2{
@@ -49,3 +50,35 @@ h2{
     font-size: 2.5rem;
     padding: 0.9rem;
 }
+
+.formulario{
+    max-width: 900px;
+    background-color: rgb(99, 0, 217,0.6);
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.btn-custom {
+    background-color: whitesmoke;
+    border-color: whitesmoke;
+    color:#6300d9; 
+}
+.btn-custom:hover {
+        background-color: #6300d9;
+        color: white;
+        border-color: #6300d9; 
+}
+.form-check-input:checked {
+    background-color: #d40dfd;
+    border-color: #d40dfd;
+}
+
+
+/*Ocultar flechas Input Number*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
+input[type=number] {
+    -moz-appearance: textfield; }
+
