@@ -51,7 +51,9 @@ const selectVuelo = document.getElementById('vuelo');
 const selectHotel = document.getElementById('hotel');
 const miFormulario = document.getElementById('formulario');
 const datosUsuario = document.querySelector('.datosUsuario');
-const datosPaquete = document.querySelector('.datosPaquete');
+const datosParques = document.querySelector('.datosParques');
+const datosHoteles = document.querySelector('.datosHoteles');
+const datosVuelos = document.querySelector('.datosVuelos');
 const totales = document.querySelector('.totales');
 const parksChecked = document.querySelectorAll('.checkSi:checked');
 const parksElegidos = Array.from(parksChecked);
@@ -116,7 +118,7 @@ function estadiaHotel(){
     }
     return total;
 }
-
+/*
 function mostrarUsuario(){
     datosUsuario.innerHTML="";
     const personasCantidad = document.createElement('p');
@@ -129,46 +131,51 @@ function mostrarUsuario(){
 
     datosUsuario.appendChild(personasCantidad);
     datosUsuario.appendChild(estadia);
-}
+}*/
 
-function mostrarPaquete(){
-    datosPaquete.innerHTML="";
+function mostrarParques(){
+    datosParques.innerHTML="";
     const parqueSelect = document.createElement('p');
     parqueSelect.classList.add('text-normal');
     parqueSelect.textContent = "Valor Final Atracciones Disney parques temáticos: $"+totalP+" USD";
+    
+    datosParques.appendChild(parqueSelect);
+}
 
+function mostrarHoteles(){
+    datosHoteles.innerHTML="";
     const hotelSelect = document.createElement('p');
     hotelSelect.classList.add('text-normal');
     hotelSelect.textContent = "Valor Final por una estadia de "+ dias.value +" día/s en un hotel " + hotel + " estrellas: $" +totalE+ " USD";
 
-    datosPaquete.appendChild(parqueSelect);
-    datosPaquete.appendChild(hotelSelect);
+    datosHoteles.appendChild(hotelSelect);
 }
 
 function mostrarVuelo(){
+    datosVuelos.innerHTML="";
     if (vuelo ==="AA"){
         const vueloAA = document.createElement('p');
         vueloAA.classList.add('text-normal');
         vueloAA.textContent = "Viajas por American Airlines. Valor de tu vuelo: $" +airline[0].precio+ "USD";
-        datosPaquete.appendChild(vueloAA);
+        datosVuelos.appendChild(vueloAA);
         
     }else if(vuelo ==="AR"){
         const vueloAR = document.createElement('p');
         vueloAR.classList.add('text-normal');
         vueloAR.textContent = "Viajas por Aerolineas Argentinas. Valor de tu vuelo: $" +airline[1].precio+ "USD";
-        datosPaquete.appendChild(vueloAR)
+        datosVuelos.appendChild(vueloAR)
         
     }else if(vuelo ==="LA"){
         const vueloLA = document.createElement('p');
         vueloLA.classList.add('text-normal');
         vueloLA.textContent = "Viajas por LATAM. Valor de tu vuelo: $" +airline[2].precio+ "USD";
-        datosPaquete.appendChild(vueloLA);
+        datosVuelos.appendChild(vueloLA);
         
     }else{
         const vueloNone = document.createElement('p');
         vueloNone.classList.add('text-normal');
         vueloNone.textContent = "No seleccionaste ninguna aerolinea";
-        datosPaquete.appendChild(vueloNone);
+        datosVuelos.appendChild(vueloNone);
     }
 }
 
@@ -235,8 +242,10 @@ function operaciones(){
 function validarFormulario(e){
     e.preventDefault ();
     operaciones();
-    mostrarUsuario();
-    mostrarPaquete();
+    parkTotal();
+    //mostrarUsuario();
+    mostrarParques();
+    mostrarHoteles();
     mostrarVuelo();
     mostrarTotalesUSD();
     mostrarTotalesARS();
@@ -253,11 +262,14 @@ dias.addEventListener("input",() => {
 
 selectVuelo.onclick = () => {
     vuelo = selectVuelo.options[selectVuelo.selectedIndex].value;
+    mostrarVuelo();
     console.log(vuelo);
 }
 
 selectHotel.onclick = () =>{
     hotel = selectHotel.options[selectHotel.selectedIndex].value;
+    operaciones();
+    mostrarHoteles();
     console.log(hotel);
 }
 
