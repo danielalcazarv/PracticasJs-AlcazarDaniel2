@@ -24,6 +24,16 @@ class Hotel {
     }
 }
 
+class Datos {
+    constructor(id, personas, dias, vuelo, hotel){
+        this.id = id.toUpperCase();
+        this.personas = parseInt(personas);
+        this.dias = parseInt(dias);
+        this.vuelo = vuelo.toUpperCase();
+        this.hotel = parseInt(hotel);
+    }
+}
+
 const SUMA = (a,b) => a + b;
 const MULTI = (a,b) => a * b;
 
@@ -55,9 +65,6 @@ const datosParques = document.querySelector('.datosParques');
 const datosHoteles = document.querySelector('.datosHoteles');
 const datosVuelos = document.querySelector('.datosVuelos');
 const totales = document.querySelector('.totales');
-const parksChecked = document.querySelectorAll('.checkSi:checked');
-const parksElegidos = Array.from(parksChecked);
-
 
 let totalP = 0;
 let totalE = 0;
@@ -65,49 +72,48 @@ let vuelo;
 let cotiHoy = 212;
 let hotel;
 
-/*
-const pesificarParks = parks.map ( x => {
-    return {
-        id: x.id,
-        nombre: x.nombre,
-        precio: x.precio * cotiHoy,
-    }
-})
-
-const pesificarAirline = airline.map ( x => {
-    return {
-        id: x.id,
-        nombre: x.nombre,
-        precio: x.precio * cotiHoy,
-    }
-})
-
-const pesificarHotels = hotels.map ( x => {
-    return {
-        id: x.id,
-        estrellas: x.estrellas,
-        nombre: x.nombre,
-        precio: x.precio * cotiHoy,
-    }
-})*/
-
 //Funciones
-function parkTotal (){
-    const seleccion = [];
-    for (let i = 0; i < parksElegidos.length; i++) {
-        seleccion.push(parksElegidos[i].value)
+function parksElegidos(){
+    let seleccion = [];
+    
+    let magic = document.getElementById("p1");
+    if(magic.checked){
+        seleccion.push(parks[0].precio);
     }
-    const filtrar = parks.filter((x)=>!seleccion.find(y=>x.id==y))
-    console.log(filtrar);
-
-    const diferencia = parks.filter((x)=>!filtrar.find(y=>x.id==y.id));
-    console.log(diferencia);
-    let total = 0;
-
-    for (let i = 0; i < diferencia.length; i++){
-        total = total + diferencia[i].precio;
+    
+    let epcot = document.getElementById("p2");
+    if (epcot.checked){
+        seleccion.push(parks[1].precio);
     }
-    return total;
+    
+    let animal = document.getElementById("p3");
+    if (animal.checked){
+        seleccion.push(parks[2].precio);
+    }
+    
+    let hollywood = document.getElementById("p4");
+    if (hollywood.checked){
+        seleccion.push(parks[3].precio);
+    }
+    
+    let thyphoon = document.getElementById("p5");
+    if (thyphoon.checked){
+        seleccion.push(parks[4].precio);
+    }
+    
+    let blizzard = document.getElementById("p6");
+    if (blizzard.checked){
+        seleccion.push(parks[5].precio);
+    }
+    
+    if (seleccion.length>0){
+        let total = 0;
+        for (i = 0; i < seleccion.length; i++){
+            total = total + seleccion[i];
+        }
+        //console.log(total);
+        return total;
+    }
 }
 
 function estadiaHotel(){
@@ -236,13 +242,13 @@ function mostrarTotalesARS(){
 
 function operaciones(){
     totalE = dias.value * personas.value * estadiaHotel();
-    totalP = personas.value * parkTotal();
+    totalP = personas.value * parksElegidos();
 }
 
 function validarFormulario(e){
     e.preventDefault ();
     operaciones();
-    parkTotal();
+    parksElegidos();
     //mostrarUsuario();
     mostrarParques();
     mostrarHoteles();
@@ -274,3 +280,25 @@ selectHotel.onclick = () =>{
 }
 
 miFormulario.addEventListener("submit", validarFormulario);
+
+//Local Storage
+const datosIngresados = [];
+datosIngresados.push (new Datos("lastone",personas.value, dias.value,selectVuelo.options[selectVuelo.selectedIndex].value, selectHotel.options[selectHotel.selectedIndex].value ))
+
+const datosIngresadosLS = (clave,valor) => { localStorage.setItem(clave,valor)};
+datosIngresadosLS("datosAlmacenados",JSON.stringify(datosIngresados));
+
+const objIngresado = JSON.parse(localStorage.getItem("datosAlmacenados"));
+
+
+/*
+const persIngr = localStorage.setItem('personasIngresadas', personas.value);
+console.log (persIngr);
+const persIngrJS = JSON.parse(persIngr);
+console.log(persIngrJS)
+localStorage.setItem('diasIngresados', dias.value);
+console.log (localStorage.getItem('diasIngresados'));
+localStorage.setItem('vueloIngresado', selectVuelo.options[selectVuelo.selectedIndex].value);
+console.log (localStorage.getItem('vueloIngresado'));
+localStorage.setItem('hotelIngresado', selectHotel.options[selectHotel.selectedIndex].value);
+console.log (localStorage.getItem('hotelIngresado'));*/
