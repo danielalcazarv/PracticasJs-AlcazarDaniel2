@@ -65,6 +65,21 @@ let cotiHoy = 205; //7-3-2022
 let hotel;
 
 //Funciones
+/*
+function mostrarUsuario(){
+    datosUsuario.innerHTML="";
+    const personasCantidad = document.createElement('p');
+    personasCantidad.classList.add('text-normal');
+    personasCantidad.textContent = "Cantidad Total de Personas: " + personas.value;
+
+    const estadia = document.createElement('p');
+    estadia.classList.add('text-normal');
+    estadia.textContent = "Estadia total ingresada: " + dias.value + " día/s";
+
+    datosUsuario.appendChild(personasCantidad);
+    datosUsuario.appendChild(estadia);
+}*/
+
 function parksElegidos(){
     const seleccion = [];
     
@@ -90,29 +105,6 @@ function parksElegidos(){
     return total;
 }
 
-function estadiaHotel(){
-    const resultado = hotels.filter((x)=>x.estrellas == hotel);
-    let total = 0;
-    for (let i = 0; i < resultado.length; i++){
-        total = total + resultado[i].precio;
-    }
-    return total;
-}
-/*
-function mostrarUsuario(){
-    datosUsuario.innerHTML="";
-    const personasCantidad = document.createElement('p');
-    personasCantidad.classList.add('text-normal');
-    personasCantidad.textContent = "Cantidad Total de Personas: " + personas.value;
-
-    const estadia = document.createElement('p');
-    estadia.classList.add('text-normal');
-    estadia.textContent = "Estadia total ingresada: " + dias.value + " día/s";
-
-    datosUsuario.appendChild(personasCantidad);
-    datosUsuario.appendChild(estadia);
-}*/
-
 function mostrarParques(){
     datosParques.innerHTML="";
     const parqueSelect = document.createElement('p');
@@ -120,6 +112,12 @@ function mostrarParques(){
     parqueSelect.textContent = "Valor Final Atracciones Disney parques temáticos: $"+totalP+" USD";
     
     datosParques.appendChild(parqueSelect);
+}
+
+function estadiaHotel(){
+    const seleccion = hotels.filter((x)=>x.estrellas == hotel);
+    const resultado = seleccion.length>0 ? seleccion[0].precio : 0;
+    return resultado;
 }
 
 function mostrarHoteles(){
@@ -131,24 +129,30 @@ function mostrarHoteles(){
     datosHoteles.appendChild(hotelSelect);
 }
 
+function precioVuelo(){
+    const seleccion = airline.filter((x)=>x.nombre == vuelo);
+    const resultado = seleccion.length>0 ? seleccion[0].precio : 0;
+    return MULTI (resultado,personas.value);
+}
+
 function mostrarVuelo(){
     datosVuelos.innerHTML="";
     if (vuelo ==="AA"){
         const vueloAA = document.createElement('p');
         vueloAA.classList.add('text-normal');
-        vueloAA.textContent = "Viajas por American Airlines. Valor de tu vuelo: $" +airline[0].precio+ "USD";
+        vueloAA.textContent = "Viajas por American Airlines. Valor total del vuelo: $" +precioVuelo()+ " USD Son: "+personas.value+" pasaje/s.";
         datosVuelos.appendChild(vueloAA);
         
     }else if(vuelo ==="AR"){
         const vueloAR = document.createElement('p');
         vueloAR.classList.add('text-normal');
-        vueloAR.textContent = "Viajas por Aerolineas Argentinas. Valor de tu vuelo: $" +airline[1].precio+ "USD";
+        vueloAR.textContent = "Viajas por Aerolineas Argentinas. Valor total del vuelo: $" +precioVuelo()+ " USD Son: "+personas.value+" pasaje/s.";
         datosVuelos.appendChild(vueloAR)
         
     }else if(vuelo ==="LA"){
         const vueloLA = document.createElement('p');
         vueloLA.classList.add('text-normal');
-        vueloLA.textContent = "Viajas por LATAM. Valor de tu vuelo: $" +airline[2].precio+ "USD";
+        vueloLA.textContent = "Viajas por LATAM. Valor total del vuelo: $" +precioVuelo()+ " USD Son: "+personas.value+" pasaje/s.";
         datosVuelos.appendChild(vueloLA);
         
     }else{
@@ -164,25 +168,25 @@ function mostrarTotalesUSD(){
     if (vuelo ==="AA"){
         const vueloAA = document.createElement('p');
         vueloAA.classList.add('text-total');
-        vueloAA.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (airline[0].precio,SUMA(totalE,totalP)) + "USD";
+        vueloAA.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (precioVuelo(),SUMA(totalE,totalP)) + " USD";
         totales.appendChild(vueloAA);
     
     }else if(vuelo ==="AR"){
         const vueloAR = document.createElement('p');
         vueloAR.classList.add('text-total');
-        vueloAR.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (airline[1].precio,SUMA(totalE,totalP)) + "USD";
+        vueloAR.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (precioVuelo(),SUMA(totalE,totalP)) + " USD";
         totales.appendChild(vueloAR)
         
     }else if(vuelo ==="LA"){
         const vueloLA = document.createElement('p');
         vueloLA.classList.add('text-total');
-        vueloLA.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (airline[2].precio,SUMA(totalE,totalP)) + "USD";
+        vueloLA.textContent = "VALOR TOTAL EN DOLARES: $" + SUMA (precioVuelo(),SUMA(totalE,totalP)) + " USD";
         totales.appendChild(vueloLA);
         
     }else{
         const vueloNone = document.createElement('p');
         vueloNone.classList.add('text-total');
-        vueloNone.textContent = "VALOR TOTAL EN DOLARES: $"+ SUMA (totalE,totalP) + "USD";
+        vueloNone.textContent = "VALOR TOTAL EN DOLARES: $"+ SUMA (totalE,totalP) + " USD";
         totales.appendChild(vueloNone);
     }
 }
@@ -191,25 +195,25 @@ function mostrarTotalesARS(){
     if (vuelo ==="AA"){
         const vueloAA = document.createElement('p');
         vueloAA.classList.add('text-total');
-        vueloAA.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (airline[0].precio,SUMA(totalE,totalP)),cotiHoy) + "ARS";
+        vueloAA.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (precioVuelo(),SUMA(totalE,totalP)),cotiHoy) + " ARS";
         totales.appendChild(vueloAA);
     
     }else if(vuelo ==="AR"){
         const vueloAR = document.createElement('p');
         vueloAR.classList.add('text-total');
-        vueloAR.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (airline[1].precio,SUMA(totalE,totalP)),cotiHoy) + "ARS";
+        vueloAR.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (precioVuelo(),SUMA(totalE,totalP)),cotiHoy) + " ARS";
         totales.appendChild(vueloAR)
         
     }else if(vuelo ==="LA"){
         const vueloLA = document.createElement('p');
         vueloLA.classList.add('text-total');
-        vueloLA.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (airline[2].precio,SUMA(totalE,totalP)),cotiHoy) + "ARS";
+        vueloLA.textContent = "VALOR TOTAL EN PESOS: $" + MULTI(SUMA (precioVuelo(),SUMA(totalE,totalP)),cotiHoy) + " ARS";
         totales.appendChild(vueloLA);
         
     }else{
         const vueloNone = document.createElement('p');
         vueloNone.classList.add('text-total');
-        vueloNone.textContent = "VALOR TOTAL EN PESOS: $"+ MULTI(SUMA(totalE,totalP),cotiHoy) + "ARS";
+        vueloNone.textContent = "VALOR TOTAL EN PESOS: $"+ MULTI(SUMA(totalE,totalP),cotiHoy) + " ARS";
         totales.appendChild(vueloNone);
     }
 }
