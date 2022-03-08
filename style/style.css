@@ -36,7 +36,7 @@ h2{
 .text-normal{
     max-width: 1200px;
     color: #ffba08;
-    background-color: rgb(156, 1, 32,0.6);
+    background-color: rgb(156, 1, 32,0.75);
     margin: 0 auto;
     font-size: 2rem;
     padding: 0.9rem;
@@ -45,7 +45,7 @@ h2{
 .text-total{
     max-width: 1200px;
     color: #ffba08;
-    background-color: rgb(156, 1, 32,0.6);
+    background-color: rgb(156, 1, 32,0.75);
     font-weight: bold;
     margin: 0 auto;
     font-size: 2.5rem;
@@ -54,7 +54,7 @@ h2{
 
 .formulario{
     max-width: 900px;
-    background-color: rgb(99, 0, 217,0.6);
+    background-color: rgb(99, 0, 217,0.75);
     font-weight: bold;
     color: aliceblue;
 }

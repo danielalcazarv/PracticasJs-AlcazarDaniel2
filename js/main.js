@@ -1,13 +1,5 @@
 //Variables
-class Parques {
-    constructor(id, nombre, precio){
-        this.id = parseInt(id);
-        this.nombre = nombre.toUpperCase();
-        this.precio = parseFloat(precio);
-    }
-}
-
-class Aerolineas {
+class ParquesYAereos {
     constructor(id, nombre, precio){
         this.id = parseInt(id);
         this.nombre = nombre.toUpperCase();
@@ -38,17 +30,17 @@ const SUMA = (a,b) => a + b;
 const MULTI = (a,b) => a * b;
 
 const parks = [];   
-parks.push (new Parques(1,"magic kingdom", 109));
-parks.push (new Parques(2,"epcot", 109));
-parks.push (new Parques(3,"animal kingdom", 109));
-parks.push (new Parques(4,"hollywood Studios", 109));
-parks.push (new Parques(5,"Typhoon Lagoon", 74));
-parks.push (new Parques(6,"Blizzard Beach", 74));
+parks.push (new ParquesYAereos(1,"magic kingdom", 109));
+parks.push (new ParquesYAereos(2,"epcot", 109));
+parks.push (new ParquesYAereos(3,"animal kingdom", 109));
+parks.push (new ParquesYAereos(4,"hollywood Studios", 109));
+parks.push (new ParquesYAereos(5,"Typhoon Lagoon", 74));
+parks.push (new ParquesYAereos(6,"Blizzard Beach", 74));
 
 const airline = [];
-airline.push (new Aerolineas(1,"AA", 1300));
-airline.push (new Aerolineas(2,"AR", 1100));
-airline.push (new Aerolineas(3,"LA", 900));
+airline.push (new ParquesYAereos(1,"AA", 1300));
+airline.push (new ParquesYAereos(2,"AR", 1100));
+airline.push (new ParquesYAereos(3,"LA", 900));
 
 const hotels = [];
 hotels.push (new Hotel(1,3, "value hotels", 68));
@@ -69,51 +61,33 @@ const totales = document.querySelector('.totales');
 let totalP = 0;
 let totalE = 0;
 let vuelo;
-let cotiHoy = 212;
+let cotiHoy = 205; //7-3-2022
 let hotel;
 
 //Funciones
 function parksElegidos(){
-    let seleccion = [];
+    const seleccion = [];
     
     let magic = document.getElementById("p1");
-    if(magic.checked){
-        seleccion.push(parks[0].precio);
-    }
+    magic.checked && seleccion.push(parks[0].precio);
     
     let epcot = document.getElementById("p2");
-    if (epcot.checked){
-        seleccion.push(parks[1].precio);
-    }
+    epcot.checked && seleccion.push(parks[1].precio);
     
     let animal = document.getElementById("p3");
-    if (animal.checked){
-        seleccion.push(parks[2].precio);
-    }
+    animal.checked && seleccion.push(parks[2].precio);
     
     let hollywood = document.getElementById("p4");
-    if (hollywood.checked){
-        seleccion.push(parks[3].precio);
-    }
+    hollywood.checked && seleccion.push(parks[3].precio);
     
     let thyphoon = document.getElementById("p5");
-    if (thyphoon.checked){
-        seleccion.push(parks[4].precio);
-    }
+    thyphoon.checked && seleccion.push(parks[4].precio);
     
     let blizzard = document.getElementById("p6");
-    if (blizzard.checked){
-        seleccion.push(parks[5].precio);
-    }
-    
-    if (seleccion.length>0){
-        let total = 0;
-        for (i = 0; i < seleccion.length; i++){
-            total = total + seleccion[i];
-        }
-        //console.log(total);
-        return total;
-    }
+    blizzard.checked && seleccion.push(parks[5].precio);
+
+    const total = seleccion.length>0 ? seleccion.reduce((a,b)=>a+b,0) : 0;
+    return total;
 }
 
 function estadiaHotel(){
