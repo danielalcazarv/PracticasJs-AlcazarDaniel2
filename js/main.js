@@ -64,6 +64,7 @@ let vuelo;
 let cotiHoy = 205; //7-3-2022
 let hotel;
 
+
 //Funciones
 /*
 function mostrarUsuario(){
@@ -79,6 +80,11 @@ function mostrarUsuario(){
     datosUsuario.appendChild(personasCantidad);
     datosUsuario.appendChild(estadia);
 }*/
+
+let str = "[{lat:42.021631,lng:-93.624239},{lat:19.112049,lng:72.870234}]";
+let jsonStr = str.replace(/(lat|lng)/g, '"' + "$1" + '"');
+let json = JSON.parse(jsonStr);
+console.log(json);
 
 function parksElegidos(){
     const seleccion = [];
@@ -241,7 +247,7 @@ personas.addEventListener("input", () =>{
 });
 
 dias.addEventListener("input",() => {
-    console.log(dias.value)
+    console.log(dias.value);
 })
 
 selectVuelo.onclick = () => {
