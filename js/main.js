@@ -81,10 +81,10 @@ function mostrarUsuario(){
     datosUsuario.appendChild(estadia);
 }*/
 
-let str = "[{lat:42.021631,lng:-93.624239},{lat:19.112049,lng:72.870234}]";
-let jsonStr = str.replace(/(lat|lng)/g, '"' + "$1" + '"');
-let json = JSON.parse(jsonStr);
-console.log(json);
+function diasContados () {
+    let dt = config.onClose();
+    return dt;
+}
 
 function parksElegidos(){
     const seleccion = [];
@@ -130,7 +130,7 @@ function mostrarHoteles(){
     datosHoteles.innerHTML="";
     const hotelSelect = document.createElement('p');
     hotelSelect.classList.add('text-normal');
-    hotelSelect.textContent = "Valor Final por una estadia de "+ dias.value +" día/s en un hotel " + hotel + " estrellas: $" +totalE+ " USD";
+    hotelSelect.textContent = "Valor Final por una estadia de "+ diasContados() +" noche/s en un hotel " + hotel + " estrellas: $" +totalE+ " USD";
 
     datosHoteles.appendChild(hotelSelect);
 }
@@ -225,7 +225,7 @@ function mostrarTotalesARS(){
 }
 
 function operaciones(){
-    totalE = dias.value * personas.value * estadiaHotel();
+    totalE = diasContados() * personas.value * estadiaHotel();
     totalP = personas.value * parksElegidos();
 }
 
@@ -248,6 +248,7 @@ personas.addEventListener("input", () =>{
 
 dias.addEventListener("input",() => {
     console.log(dias.value);
+    mostrarHoteles();
 })
 
 selectVuelo.onclick = () => {
@@ -267,7 +268,7 @@ miFormulario.addEventListener("submit", validarFormulario);
 
 //Local Storage
 const datosIngresados = [];
-datosIngresados.push (new Datos("lastone",personas.value, dias.value,selectVuelo.options[selectVuelo.selectedIndex].value, selectHotel.options[selectHotel.selectedIndex].value ))
+datosIngresados.push (new Datos("lastone",personas.value, diasContados(),selectVuelo.options[selectVuelo.selectedIndex].value, selectHotel.options[selectHotel.selectedIndex].value ))
 
 const datosIngresadosLS = (clave,valor) => { localStorage.setItem(clave,valor)};
 datosIngresadosLS("datosAlmacenados",JSON.stringify(datosIngresados));

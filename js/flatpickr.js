@@ -1,4 +1,4 @@
-modificado={
+config={
     mode: "range",
     minDate: "today",
     dateFormat: "d-m-Y",
@@ -13,7 +13,13 @@ modificado={
             longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         },
     },
+    onClose: function(selectedDates, dateStr, instance) {
+        let daysInRange = document.getElementsByClassName('inRange');
+        console.log(daysInRange);
+        let daysLengthTotal = daysInRange.length>=1 ? daysInRange.length + 1 : 0;
+        console.log(daysLengthTotal);
+        return daysLengthTotal;
+    }
 }
 
-flatpickr("input[type=datetime-local]", modificado);
-
+flatpickr("input[type=datetime-local]", config);
