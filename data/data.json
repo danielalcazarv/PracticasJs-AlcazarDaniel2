@@ -1,0 +1,44 @@
+[
+    {
+        "id":1,
+        "nombre":"Magic Kingdom",
+        "alt":"MK",
+        "url":"../img/mk-mini.jpg",
+        "p":"Si hay un parque que representa la magia de Orlando, simboliza la magia de Disney y representará en la memoria la magia de nuestro viaje, ese parque es Magic Kingdom."
+    },
+    {
+        "id":2,
+        "nombre":"Epcot",
+        "alt":"EP",
+        "url":"../img/ep-mini.jpg",
+        "p":"Imaginado por Walt como una ciudad futurista, el parque hoy está en plena transformación. Viajen al mundo del mañana y las culturas alrededor del planeta."
+    },
+    {
+        "id":3,
+        "nombre":"Hollywood Studios",
+        "alt":"HS",
+        "url":"../img/hs-mini.jpg",
+        "p":"La magia de las películas cobra vida en Disney’s Hollywood Studios, logrando que sus visitantes vivan la diversión, la aventura y el glamour del cine. Rejuvenecido con la construcción de Star Wars Galaxy´s Edge y Toy Story Land, el parque regala una experiencia inolvidable para chicos y grandes."
+    },
+    {
+        "id":4,
+        "nombre":"Animal Kingdom",
+        "alt":"AK",
+        "url":"../img/ak-mini.jpg",
+        "p":"Animal Kingdom, mezcla de zoológico y parque temático, enfocado en la naturaleza pero cruzado por fuertes franquicias de Disney ofrece un blend perfecto de diversión, naturaleza y asombro. Pandora: World of Avatar  terminó de consagrarlo."
+    },
+    {
+        "id":5,
+        "nombre":"Typhoon Lagoon",
+        "alt":"TL",
+        "url":"../img/tl-mini.jpg",
+        "p":"Un barco patas para arriba en la cima de una montaña… sólo en Walt Disney World es posible. Typhoon Lagoon es el más popular parque acuático de Estados Unidos."
+    },
+    {
+        "id":6,
+        "nombre":"Blizzard Beach",
+        "alt":"BB",
+        "url":"../img/bb-mini.jpg",
+        "p":"Un parque nevado en pleno estado de La Florida… sólo en Walt Disney World. Blizzard Beach combina de manera magistral emoción, adrenalina, ambientación y la imaginación como sólo Disney puede lograrlo."
+    }
+]

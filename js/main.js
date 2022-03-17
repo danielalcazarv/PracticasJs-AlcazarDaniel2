@@ -65,6 +65,47 @@ let vuelo;
 let cotiHoy = 205; //7-3-2022
 let hotel;
 
+//fetch
+const mostrarParqueImg = (parques) => {
+    const contenido = document.querySelector('.imgHotel');
+    
+    let html ="";
+
+    parques.forEach((parque) => {
+        const {nombre, alt, url,p} = parque;
+
+        html += `
+        <div class="col">
+            <div class="card">
+                <img src="${url}" width=338 height=492 class="card-img-top" alt="${alt}">
+                <div class="card-body">
+                <h5 class="card-title">${nombre}</h5>
+                <p class="card-text">${p}</p>
+                </div>
+            </div>
+        </div>
+        `;
+    })
+
+
+
+    contenido.innerHTML = html;
+};
+
+const obtenerParqueJson = () =>{
+    
+    fetch ("data/data.json")
+        .then(respuesta => {
+            return respuesta.json();
+        })
+        .then((datos) => {
+            console.log(datos);
+            mostrarParqueImg (datos);
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+};
 
 //Funciones
 /*
@@ -240,6 +281,7 @@ function validarFormulario(e){
     mostrarVuelo();
     mostrarTotalesUSD();
     mostrarTotalesARS();
+    obtenerParqueJson();
 }
 
 //Eventos
@@ -288,3 +330,5 @@ localStorage.setItem('vueloIngresado', selectVuelo.options[selectVuelo.selectedI
 console.log (localStorage.getItem('vueloIngresado'));
 localStorage.setItem('hotelIngresado', selectHotel.options[selectHotel.selectedIndex].value);
 console.log (localStorage.getItem('hotelIngresado'));*/
+
+

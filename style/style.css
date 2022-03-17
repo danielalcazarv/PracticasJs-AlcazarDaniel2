@@ -6,10 +6,10 @@
 }
 main{
     background-image: url(../img/disney-magic2.jpg);
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height:100vmax;
+    /*background-attachment: fixed;*/
+    background-size: auto;
+    background-repeat: repeat;
+    /*height:100vmax;*/
 }
 
 h1{
@@ -50,6 +50,16 @@ h2{
     margin: 0 auto;
     font-size: 2.5rem;
     padding: 0.9rem;
+}
+
+.cards-box{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card{
+    background-color: rgb(99, 0, 217,0.75);
+    color: aliceblue;
 }
 
 .formulario{
