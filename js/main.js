@@ -68,12 +68,24 @@ let hotel;
 //fetch
 const mostrarParqueImg = (parques) => {
     const contenido = document.querySelector('.imgHotel');
-    
+    const seleccion = [];
     let html ="";
+    
+    let magic = document.getElementById("p1");
+    magic.checked && seleccion.push(parques[0]);
+    let epcot = document.getElementById("p2");
+    epcot.checked && seleccion.push(parques[1]);
+    let animal = document.getElementById("p3");
+    animal.checked && seleccion.push(parques[2]);
+    let hollywood = document.getElementById("p4");
+    hollywood.checked && seleccion.push(parques[3]);
+    let thyphoon = document.getElementById("p5");
+    thyphoon.checked && seleccion.push(parques[4]);
+    let blizzard = document.getElementById("p6");
+    blizzard.checked && seleccion.push(parques[5]);
 
-    parques.forEach((parque) => {
+    seleccion.forEach((parque) => {
         const {nombre, alt, url,p} = parque;
-
         html += `
         <div class="col">
             <div class="card">
@@ -87,14 +99,12 @@ const mostrarParqueImg = (parques) => {
         `;
     })
 
-
-
     contenido.innerHTML = html;
 };
 
 const obtenerParqueJson = () =>{
     
-    fetch ("data/data.json")
+    fetch ("data/data-parques.json")
         .then(respuesta => {
             return respuesta.json();
         })
