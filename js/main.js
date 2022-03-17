@@ -67,7 +67,7 @@ let hotel;
 
 //fetch
 const mostrarParqueImg = (parques) => {
-    const contenido = document.querySelector('.imgHotel');
+    const contenido = document.querySelector('.imgParques');
     const seleccion = [];
     let html ="";
     
