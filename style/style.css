@@ -5,11 +5,7 @@
     font-family: 'Inter', sans-serif; 
 }
 main{
-    background-image: url(../img/disney-magic2.jpg);
-    /*background-attachment: fixed;*/
-    background-size: auto;
-    background-repeat: repeat;
-    /*height:100vmax;*/
+    background-color: #ff6f61ff;
 }
 
 h1{
@@ -35,8 +31,8 @@ h2{
 
 .text-normal{
     max-width: 1200px;
-    color: #ffba08;
-    background-color: rgb(156, 1, 32,0.75);
+    color: #feae51ff;
+    background-color: #c5299bff;
     margin: 0 auto;
     font-size: 2rem;
     padding: 0.9rem;
@@ -44,8 +40,8 @@ h2{
 
 .text-total{
     max-width: 1200px;
-    color: #ffba08;
-    background-color: rgb(156, 1, 32,0.75);
+    color: #feae51ff;
+    background-color: #c5299bff;
     font-weight: bold;
     margin: 0 auto;
     font-size: 2.5rem;

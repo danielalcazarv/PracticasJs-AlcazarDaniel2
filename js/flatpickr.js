@@ -16,9 +16,10 @@ config={
     onClose: function(selectedDates, dateStr, instance) {
         let daysInRange = document.getElementsByClassName('inRange');
         console.log(daysInRange);
-        let daysLengthTotal = daysInRange.length>=1 ? daysInRange.length + 1 : 0;
+        let daysLengthTotal = daysInRange.length>=0 ? daysInRange.length + 1 : 0;
         console.log(daysLengthTotal);
         return daysLengthTotal;
+
     }
 }
 

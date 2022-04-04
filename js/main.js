@@ -20,7 +20,7 @@ class Datos {
     constructor(id, personas, dias, vuelo, hotel){
         this.id = id.toUpperCase();
         this.personas = parseInt(personas);
-        this.dias = parseInt(dias);
+        this.dias = dias;
         this.vuelo = vuelo.toUpperCase();
         this.hotel = parseInt(hotel);
     }
@@ -58,11 +58,13 @@ const datosParques = document.querySelector('.datosParques');
 const datosHoteles = document.querySelector('.datosHoteles');
 const datosVuelos = document.querySelector('.datosVuelos');
 const totales = document.querySelector('.totales');
+const cotiTotales = document.querySelector('.cotiTotales');
+const urlCotiOficial = "https://cors-solucion.herokuapp.com/https://api-dolar-argentina.herokuapp.com/api/dolaroficial";
 
 let totalP = 0;
 let totalE = 0;
 let vuelo;
-let cotiHoy = 205; //7-3-2022
+let cotiHoy;
 let hotel;
 
 //fetch
@@ -109,7 +111,6 @@ const obtenerParqueJson = () =>{
             return respuesta.json();
         })
         .then((datos) => {
-            console.log(datos);
             mostrarParqueImg (datos);
         })
         .catch((err) => {
@@ -118,20 +119,20 @@ const obtenerParqueJson = () =>{
 };
 
 //Funciones
-/*
-function mostrarUsuario(){
-    datosUsuario.innerHTML="";
-    const personasCantidad = document.createElement('p');
-    personasCantidad.classList.add('text-normal');
-    personasCantidad.textContent = "Cantidad Total de Personas: " + personas.value;
+async function getCoti(urlCotiOficial){
+    const respuesta = await fetch(urlCotiOficial);
+    const data = await respuesta.json();
+    return data;
+}
 
-    const estadia = document.createElement('p');
-    estadia.classList.add('text-normal');
-    estadia.textContent = "Estadia total ingresada: " + dias.value + " día/s";
+async function handleInitialLoad() {
+    const data = await getCoti(urlCotiOficial);
+    renderProjectsToDom(data);
+}
 
-    datosUsuario.appendChild(personasCantidad);
-    datosUsuario.appendChild(estadia);
-}*/
+function renderProjectsToDom(data) {
+    cotiHoy = parseInt(data.venta);
+}
 
 function diasContados () {
     let dt = config.onClose();
@@ -276,6 +277,13 @@ function mostrarTotalesARS(){
     }
 }
 
+function mostrarCoti(){
+    const cotiOficial = document.createElement('p');
+    cotiOficial.classList.add('text-total');
+    cotiOficial.textContent = " Cotización del día: $1USD = $"+cotiHoy+" ARS";
+    cotiTotales.appendChild(cotiOficial);
+}
+
 function operaciones(){
     totalE = diasContados() * personas.value * estadiaHotel();
     totalP = personas.value * parksElegidos();
@@ -285,60 +293,37 @@ function validarFormulario(e){
     e.preventDefault ();
     operaciones();
     parksElegidos();
-    //mostrarUsuario();
     mostrarParques();
     mostrarHoteles();
     mostrarVuelo();
     mostrarTotalesUSD();
     mostrarTotalesARS();
+    mostrarCoti();
     obtenerParqueJson();
 }
 
 //Eventos
-personas.addEventListener("input", () =>{
-    console.log(personas.value)
-});
-
 dias.addEventListener("input",() => {
-    console.log(dias.value);
     mostrarHoteles();
 })
-
 selectVuelo.onclick = () => {
     vuelo = selectVuelo.options[selectVuelo.selectedIndex].value;
     mostrarVuelo();
-    console.log(vuelo);
 }
-
 selectHotel.onclick = () =>{
     hotel = selectHotel.options[selectHotel.selectedIndex].value;
     operaciones();
     mostrarHoteles();
-    console.log(hotel);
 }
-
 miFormulario.addEventListener("submit", validarFormulario);
+window.addEventListener("DOMContentLoaded", handleInitialLoad);
 
 //Local Storage
 const datosIngresados = [];
-datosIngresados.push (new Datos("lastone",personas.value, diasContados(),selectVuelo.options[selectVuelo.selectedIndex].value, selectHotel.options[selectHotel.selectedIndex].value ))
+datosIngresados.push (new Datos("lastone",personas.value, config.onClose(),selectVuelo.options[selectVuelo.selectedIndex].value, selectHotel.options[selectHotel.selectedIndex].value ))
 
 const datosIngresadosLS = (clave,valor) => { localStorage.setItem(clave,valor)};
 datosIngresadosLS("datosAlmacenados",JSON.stringify(datosIngresados));
 
 const objIngresado = JSON.parse(localStorage.getItem("datosAlmacenados"));
-
-
-/*
-const persIngr = localStorage.setItem('personasIngresadas', personas.value);
-console.log (persIngr);
-const persIngrJS = JSON.parse(persIngr);
-console.log(persIngrJS)
-localStorage.setItem('diasIngresados', dias.value);
-console.log (localStorage.getItem('diasIngresados'));
-localStorage.setItem('vueloIngresado', selectVuelo.options[selectVuelo.selectedIndex].value);
-console.log (localStorage.getItem('vueloIngresado'));
-localStorage.setItem('hotelIngresado', selectHotel.options[selectHotel.selectedIndex].value);
-console.log (localStorage.getItem('hotelIngresado'));*/
-
 
