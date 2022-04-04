@@ -85,7 +85,7 @@
                 </div>
                 <div class="col-12">
                     <button type="submit" id="btn" class="btn btn-custom">Calcular Paquete</button>
-                    <button class="btn btn-custom">Enviar por Mail</button>
+                    <button id="btnMail" class="btn btn-custom">Enviar por Mail</button>
                 </div>
             </form>
         </div>
@@ -114,6 +114,15 @@
     <!--Flatpicker-->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="js/flatpickr.js"></script>
+    <!--emailjs-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+        emailjs.init("_AHZlDdfXvUEKxi89");
+        })();
+    </script>
+    <!--SweetAlert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!--js-->
     <script src="js/main.js"></script>
 </body>

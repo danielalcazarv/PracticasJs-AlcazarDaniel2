@@ -17,8 +17,10 @@ class Hotel {
 }
 
 class Datos {
-    constructor(id, personas, dias, vuelo, hotel){
+    constructor(id, nombre, mail, personas, dias, vuelo, hotel){
         this.id = id.toUpperCase();
+        this.nombre = nombre.toUpperCase();
+        this.mail = mail.toLowerCase();
         this.personas = parseInt(personas);
         this.dias = dias;
         this.vuelo = vuelo.toUpperCase();
@@ -60,6 +62,7 @@ const datosVuelos = document.querySelector('.datosVuelos');
 const totales = document.querySelector('.totales');
 const cotiTotales = document.querySelector('.cotiTotales');
 const urlCotiOficial = "https://cors-solucion.herokuapp.com/https://api-dolar-argentina.herokuapp.com/api/dolaroficial";
+const botonMail = document.getElementById('btnMail');
 
 let totalP = 0;
 let totalE = 0;
@@ -316,14 +319,65 @@ selectHotel.onclick = () =>{
     mostrarHoteles();
 }
 miFormulario.addEventListener("submit", validarFormulario);
+botonMail.addEventListener("click",enviarMail);
 window.addEventListener("DOMContentLoaded", handleInitialLoad);
 
 //Local Storage
 const datosIngresados = [];
-datosIngresados.push (new Datos("lastone",personas.value, config.onClose(),selectVuelo.options[selectVuelo.selectedIndex].value, selectHotel.options[selectHotel.selectedIndex].value ))
+datosIngresados.push (new Datos("lastone",nombrePasajero.value, mailPasajero.value,personas.value, config.onClose(),selectVuelo.options[selectVuelo.selectedIndex].value, selectHotel.options[selectHotel.selectedIndex].value ))
 
 const datosIngresadosLS = (clave,valor) => { localStorage.setItem(clave,valor)};
 datosIngresadosLS("datosAlmacenados",JSON.stringify(datosIngresados));
 
 const objIngresado = JSON.parse(localStorage.getItem("datosAlmacenados"));
 
+/***************Sweet Alert **********/
+
+function exito(){
+    swal({
+        title: "Buen Trabajo!",
+        text: "Correo enviado exitosamente!",
+        icon: "success",
+        button: "LISTO!",
+    });
+};
+
+function error(){
+    swal({
+        title: "Algo salió mal :(",
+        text: "Revisa los datos que cargaste y prueba nuevamente.",
+        icon: "error",
+        button: "REINTENTAR",
+    });
+};
+
+
+
+/***********mailjs */
+/*User ID
+_AHZlDdfXvUEKxi89
+Access Token
+KBoRY3HO3i7kdCLaIzpX5*/
+
+function enviarMail (e){
+    e.preventDefault();
+    validarMail();
+}
+
+function validarMail(){
+    if (nombrePasajero.value == "" || mailPasajero.value == "" || personas.value == ""){
+        error();
+    }else{
+        sendMail(mailPasajero.value,nombrePasajero.value,"Vas a gastar un total de $"+SUMA (precioVuelo(),SUMA(totalE,totalP))+"USD");
+        exito();
+    }
+
+}
+
+function sendMail(email,name,msg){
+    emailjs.send("service_4my2n4r","template_ayef1mm",{
+        from_name: email,
+        to_name: name,
+        message: msg,
+        });
+}
